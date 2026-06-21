@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บ้านกะเพรา | Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🏠 บ้านกะเพรา</h2>
+                <p>Admin Panel</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#bookings-section" class="nav-btn active" data-target="bookings-section">📋 รายการจองโต๊ะ</a>
+                <a href="#menu-section" class="nav-btn" data-target="menu-section">➕ จัดการเมนูอาหาร</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html" class="back-home-btn">← กลับหน้าร้าน</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Bookings View -->
+            <section id="bookings-section" class="content-section active">
+                <div class="section-header">
+                    <h2>รายการจองโต๊ะ (Bookings)</h2>
+                    <button class="btn btn-outline" id="refreshBookingsBtn">🔄 รีเฟรช</button>
+                </div>
+
+                <!-- Filter Bar -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label for="searchQuery">🔍 ค้นหา (ชื่อ / เบอร์โทร)</label>
+                        <input type="text" id="searchQuery" placeholder="พิมพ์เพื่อค้นหา...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterDate">📅 กรองตามวันที่</label>
+                        <input type="date" id="filterDate">
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn btn-outline" id="clearFilterBtn" style="margin-top: 22px;">ล้างตัวกรอง</button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>รหัสอ้างอิง</th>
+                                <th>ชื่อผู้จอง</th>
+                                <th>เบอร์โทรศัพท์</th>
+                                <th>วันที่</th>
+                                <th>เวลา</th>
+                                <th>จำนวนท่าน</th>
+                                <th>สถานะ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <!-- Data will be injected here -->
+                            <tr>
+                                <td colspan="7" class="loading-cell">กำลังโหลดข้อมูล...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Add Menu View -->
+            <section id="menu-section" class="content-section">
+                <div class="section-header">
+                    <h2>เพิ่มเมนูอาหารใหม่ (Add Menu)</h2>
+                </div>
+                
+                <div class="form-container">
+                    <form id="addMenuForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="menuName">ชื่อเมนู</label>
+                                <input type="text" id="menuName" required placeholder="เช่น กะเพราเนื้อวากิว">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="menuPrice">ราคา (บาท)</label>
+                                <input type="number" id="menuPrice" required min="1" placeholder="เช่น 159">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="menuDesc">คำอธิบาย</label>
+                                <textarea id="menuDesc" rows="3" placeholder="รายละเอียดเมนู..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="menuCategory">หมวดหมู่</label>
+                                <select id="menuCategory">
+                                    <option value="main">อาหารจานหลัก</option>
+                                    <option value="drink">เครื่องดื่ม</option>
+                                    <option value="dessert">ของหวาน</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="menuBadge">ป้ายกำกับ (Badge - ไม่บังคับ)</label>
+                                <input type="text" id="menuBadge" placeholder="เช่น ✨ เมนูแนะนำ">
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="menuImage">URL รูปภาพ</label>
+                                <input type="text" id="menuImage" placeholder="ใส่ลิงก์รูปภาพ เช่น /assets/menu4.png">
+                                <small class="hintText">ใช้รูปที่มีในโฟลเดอร์ assets (เช่น /assets/krapao.png) หรือลิงก์จากเว็บนอกได้</small>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <span>บันทึกเมนู</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <span id="toastMessage">แจ้งเตือน!</span>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
